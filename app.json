@@ -3,12 +3,16 @@
     "name": "Calculator",
     "slug": "Calculator",
     "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/calcIcon.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash1.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#f8f4f4"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,8 +23,26 @@
     "ios": {
       "supportsTablet": true
     },
+    "android": {
+      "package": "com.niteshKumar.Calculator",
+      "versionCode": 1
+    },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "description": "An Application for calculating simple arithmetic stuffs.",
+    "extra": {
+      "bugsnag": {
+        "apiKey": "426d5d00c0defe8d6a2dd6e91772ab13"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }
