@@ -17,7 +17,8 @@ function Keyboard({ handlePress }) {
         <IconBtn
           title="division"
           btnColor="secondary"
-          onPress={() => handlePress("operator", "÷")}
+          // onPress={() => handlePress("operator", "÷")}
+          onPress={() => handlePress("operator", "/")}
         />
       </View>
       <View style={styles.subContainer}>
@@ -28,7 +29,8 @@ function Keyboard({ handlePress }) {
           title="×"
           color="primary"
           btnColor="secondary"
-          onPress={() => handlePress("operator", "×")}
+          // onPress={() => handlePress("operator", "×")}
+          onPress={() => handlePress("operator", "*")}
         />
       </View>
       <View style={styles.subContainer}>

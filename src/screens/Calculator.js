@@ -36,7 +36,8 @@ function Calculator() {
     }
     // if (displayType.length < 15) {
     let current = txt[txt.length - 1];
-    let isLastSign = /(\+|−|\×|\÷)/i;
+    // let isLastSign = /(\+|−|\×|\÷)/i;
+    let isLastSign = /(\+|−|\*|\/)/i;
     let isDecimal = /(\.)/i;
     if (value === ".") {
       txt.pop();
@@ -115,7 +116,8 @@ function Calculator() {
         if (last.slice(0, -1) === "") {
           newExp.pop();
           let currentEnd = newExp[newExp.length - 1];
-          let isLastSign = /(\+|−|\×|\÷)/i;
+          // let isLastSign = /(\+|−|\×|\÷)/i;
+          let isLastSign = /(\+|−|\*|\/)/i;
           isLastSign.test(currentEnd)
             ? setIsOperatorActive(true)
             : setIsOperatorActive(false);
@@ -135,7 +137,8 @@ function Calculator() {
   };
 
   const handleActiveEqual = (value) => {
-    let isSign = /(\+|−|\×|\÷)/i;
+    // let isSign = /(\+|−|\×|\÷)/i;
+    let isSign = /(\+|−|\*|\/)/i;
     if (isSign.test(value)) {
       if (result === "∞") {
         let newExp = ["0", value];
@@ -167,7 +170,8 @@ function Calculator() {
     try {
       let exp = [...expression];
       let last = exp[exp.length - 1];
-      let isLastSign = /(\+|−|\×|\÷)/i;
+      // let isLastSign = /(\+|−|\×|\÷)/i;
+      let isLastSign = /(\+|−|\*|\/)/i;
       if (isLastSign.test(last)) {
         exp.pop();
       }
@@ -182,10 +186,26 @@ function Calculator() {
       if (res === "Infinity" || result === "NaN") {
         res = "∞";
       } else {
-        res = res.length > 10 ? parseFloat(res).toExponential(5) : res;
+        res = res.length > 10 ? parseFloat(res).toExponential(3) : res;
       }
-      res.search("e+") >= 0 ? (res = res.replace("e+", "×10^")) : null;
-      res.search("e-") >= 0 ? (res = res.replace("e-", "×10^-")) : null;
+      // console.log(
+      //   "result:",
+      //   res,
+      //   "res.search:",
+      //   res.search("e+"),
+      //   "length: ",
+      //   res.length
+      // );
+      if (
+        (res.search("e+") >= 0 || res.search("e-") >= 0) &&
+        res.length === 8
+      ) {
+        res.search("e+") >= 0 ? (res = res.replace("e+", "")) : null;
+        res.search("e-") >= 0 ? (res = res.replace("e-", "")) : null;
+      } else {
+        res.search("e+") >= 0 ? (res = res.replace("e+", "×10^")) : null;
+        res.search("e-") >= 0 ? (res = res.replace("e-", "×10^-")) : null;
+      }
       return res;
     } catch (error) {
       logger.log(error);
